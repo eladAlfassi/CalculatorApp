@@ -1,7 +1,7 @@
 from executor.abstract_executor import *
 import json
 
-class ClaculateExecutor(AbstractExecutor):
+class CalculateExecutor(AbstractExecutor):
 
     def __operation(self,x,y,operation):
         if operation == '+':
