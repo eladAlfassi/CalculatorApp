@@ -7,4 +7,4 @@ class HttpResponseDict(object):
         }
 
     def __getitem__(self, item):
-        return self.response[item]
+        return self.responseDict[item]
