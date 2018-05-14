@@ -3,18 +3,45 @@ import json
 
 class CalculateExecutor(AbstractExecutor):
 
-    def __operation(self,x,y,operation):
-        if operation == '+':
-            return str(int(x)+int(y))
-        if operation == '-':
-            return str(int(x)-int(y))
-        if operation == '*':
-            return str(int(x)*int(y))
-        if operation == '/' and not y == '0' :
-            return str(int(x)/int(y))
-        if operation == '/' and  y == '0':
-            return "BAD OPERATION"
+    BAD_OPERATION= "BAD OPERATION"
 
+    def __operation(self,x,y,operation):
+        if operation == '/' and  y == '0':
+            return CalculateExecutor.BAD_OPERATION
+
+        if operation == '+':
+            result = float(x)+float(y)
+        if operation == '-':
+            result = float(x)-float(y)
+        if operation == '*':
+            result = float(x)*float(y)
+        if operation == '/' and not y == '0' :
+            result = float(x)/float(y)
+        result = str(result)
+        print("result is: "+result)
+        # result is float so it has '.' in it
+        splitted = result.split('.')
+        right_to_dot= splitted[1]
+        if int(right_to_dot) == 0:
+            result= splitted[0]
+        print("returning result: " + result)
+        return result
+
+    def __concat_numbers(self,x,y):
+        '''
+        gets two numbers as strings
+        :param x: first number, for example 56
+        :param y: second number, for exmple 6
+        :return: 566
+        '''
+        if x== '':
+            return y
+        x=float(x)
+        splitted_x=str(x).split('.')
+        #got 01 => 1
+        if int(splitted_x[0]) == 0 and int(splitted_x[1]) == 0:
+            return y
+        return str(int(x))+str(int(y))
 
 
     def __is_operator(self, input):
@@ -37,6 +64,9 @@ class CalculateExecutor(AbstractExecutor):
         return {'status':'success','display': display, 'operator': operator, 'first_number': first_number, 'second_number': ''}
 
     def __handle_interaction(self,input,state):
+        #if got bad operation last time, restart calculator
+        if state['display'] == CalculateExecutor.BAD_OPERATION:
+            return self.__handle_first_interaction('0')
         # not in a middle of operation & got an operation (it's not first interaction so we assume first_number!=None)
         # 55 and got + => 55+
         #1
@@ -49,7 +79,7 @@ class CalculateExecutor(AbstractExecutor):
         # 2
         if state['operator'] is None and not (self.__is_operator(input) or self.__is_equal_sign(input)):
             print(">> 2\n")
-            first_number = state['first_number'] + input
+            first_number = self.__concat_numbers(state['first_number'] , input)
             return {'status':'success','display': first_number, 'operator': None, 'first_number': first_number, 'second_number': ''}
         # not in a middle of operation & got =
         # 55 and got = => 55
@@ -63,9 +93,9 @@ class CalculateExecutor(AbstractExecutor):
         # 4
         if (not state['operator'] is None) and not (self.__is_equal_sign(input) or self.__is_operator(input)):
             print(">> 4\n")
-            second_number = state['second_number'] + input
+            second_number = self.__concat_numbers(state['second_number'] , input)
             return {'status':'success','display':second_number, 'operator': state['operator'],
-                    'first_number': state['first_number'], 'second_number': input}
+                    'first_number': state['first_number'], 'second_number': second_number}
         # in a middle of operation & got an operation & second number is ''
         # 55+ and got - => 55-
         # 5
@@ -78,10 +108,7 @@ class CalculateExecutor(AbstractExecutor):
         # 6
         if (not (state['operator'] is None)) and self.__is_operator(input) and not state['second_number'] == '':
             print(">> 6\n")
-            first_number=self.__operation(state['first_number'],state['second_number'],state['operation'])
-            #possible dividing by zero
-            if first_number is "BAD OPERATION":
-                return "BAD OPERATION"
+            first_number=self.__operation(state['first_number'],state['second_number'],state['operator'])
             return {'status':'success','display': first_number, 'operator': state['operator'],
                     'first_number': state['first_number'], 'second_number': ''}
         # in a middle of operation & got equal sign & second number exist
@@ -91,14 +118,12 @@ class CalculateExecutor(AbstractExecutor):
             print(">> 7\n")
             first_number = self.__operation(state['first_number'], state['second_number'], state['operator'])
             # possible dividing by zero
-            if first_number is "BAD OPERATION":
-                return "BAD OPERATION"
             return {'status':'success','display': first_number, 'operator': None,
                     'first_number':first_number, 'second_number': ''}
         # in a middle of operation & got equal sign & second number is ''
         #55+ and got = => 55
         # 8
-        if (not (state['operator'] is None)) and self.__is_equal_sign(input) and not state['second_number'] == '':
+        if (not (state['operator'] is None)) and self.__is_equal_sign(input) and  state['second_number'] == '':
             print(">> 8\n")
             return {'status':'success','display': state['first_number'], 'operator': None,
                     'first_number': state['first_number'], 'second_number': ''}
