@@ -1,5 +1,4 @@
 # !/usr/bin/env python
-
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from io import BytesIO
 import json
@@ -64,7 +63,8 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
 def run():
     import os
-    config = json.load(open('config.json'))
+    sys.path.insert(0, '/app/server')
+    config = json.load(open('server/config.json'))
     port=config['port']
     print('starting server...')
 

@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '/app')
 from executor import calculate_executor
 from executor import not_valid_executor
 from collections import defaultdict
