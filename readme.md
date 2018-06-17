@@ -24,7 +24,7 @@ To run all services run the command:
 docker-compose up
 ```
 
-## Using the calcuator
+## Using the calculator
 open the browser and navigate to:
 ```
 http://localhost:8080/login
