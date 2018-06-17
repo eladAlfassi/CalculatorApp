@@ -33,7 +33,7 @@ enter your details and the calculator will appear.
 
 ## Making changes
 If you want to make changes in the app, make sure -as was menchend- to rebuild it after making the changes.
-Neither the less you should run the **test_calculate_executor.py** module that is in the **tests** directory.
+Neither the less, after making changes it is recommended to run the **test_calculate_executor.py** module (you can find it in the **tests** directory) to ensure that everything works as expected.
 
 Enjoy!
 
