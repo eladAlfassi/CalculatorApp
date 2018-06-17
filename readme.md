@@ -31,7 +31,7 @@ http://localhost:8080/login
 ```
 enter your details and the calculator will appear.
 
-## making changes
+## Making changes
 If you want to make changes in the app, make sure -as was menchend- to rebuild it after making the changes.
 Neither the less you should run the **test_calculate_executor.py** module that is in the **TESTS** directory.
 
