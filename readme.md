@@ -18,7 +18,7 @@ docker-compose build calculator
 ```
 You should run this command after every change you make in the **Calculator** source code.
 
-## Running the app
+# Running the app
 To run all services run the command:
 ```
 docker-compose up
@@ -29,12 +29,23 @@ Open the browser and navigate to:
 ```
 http://localhost:8080/login
 ```
-enter your details and the calculator will appear.
+Enter your details and the calculator will appear.
 
 ## Making changes
 If you want to make changes in the app, make sure -as was mentioned- to rebuild it after making the changes.
-Neither the less, after making changes it is recommended to run the **test_calculate_executor.py** module (you can find it in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory) to ensure that everything works as expected.
+Neither the less, after making changes it is highly recommended to run unit tests and integration tests as described below.
 
-Enjoy!
+
+# Test the app
+For testing the app you shuld run the following command (from the CalculatorApp directory):
+```
+python3 -m unittest discover tests
+```
+This command will run unit and integration tests on the app, and  will output if tests were successful or not.
+You can add or edit the tests by modifying  **test_calculate_executor.py** and **test_server_integration.py** located in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory.
+
+
+
+### Enjoy!
 
 
