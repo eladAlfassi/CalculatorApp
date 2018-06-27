@@ -81,5 +81,7 @@ def run():
 
     httpd.serve_forever()
 
+if __name__ == "__main__":
+    run()
+
 req_to_map=RequestToExecutorMapper()
-run()
