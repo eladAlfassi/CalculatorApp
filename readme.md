@@ -18,7 +18,7 @@ docker-compose build calculator
 ```
 You should run this command after every change you make in the **Calculator** source code.
 
-## Running the app
+# Running the app
 To run all services run the command:
 ```
 docker-compose up
@@ -45,6 +45,6 @@ this command will run unit and integration testing in the app, and output if tes
 
 
 
-# Enjoy!
+### Enjoy!
 
 
