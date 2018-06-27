@@ -29,7 +29,7 @@ Open the browser and navigate to:
 ```
 http://localhost:8080/login
 ```
-enter your details and the calculator will appear.
+Enter your details and the calculator will appear.
 
 ## Making changes
 If you want to make changes in the app, make sure -as was mentioned- to rebuild it after making the changes.
@@ -41,7 +41,7 @@ For testing the app you shuld run the following command (from the CalculatorApp 
 ```
 python3 -m unittest discover tests
 ```
-this command will run unit and integration testing in the app, and output if tests were successful or not.
+This command will run unit and integration tests on the app, and  will output if tests were successful or not.
 You can add or edit the tests by modifying  **test_calculate_executor.py** and **test_server_integration.py** located in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory.
 
 
