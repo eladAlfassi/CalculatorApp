@@ -5,7 +5,7 @@ First of all you should make sure you have [docker](https://docs.docker.com/inst
 For downloading the source code you should have [git](https://git-scm.com/downloads) installed on your machine.
 
 ## How to download?
-run this command to clone the repository:
+Run this command to clone the repository:
 ```
 git clone https://github.com/eladAlfassi/CalculatorApp.git
 ```
@@ -24,16 +24,16 @@ To run all services run the command:
 docker-compose up
 ```
 
-## Using the calcuator
-open the browser and navigate to:
+## Using the calculator
+Open the browser and navigate to:
 ```
 http://localhost:8080/login
 ```
 enter your details and the calculator will appear.
 
-## making changes
+## Making changes
 If you want to make changes in the app, make sure -as was menchend- to rebuild it after making the changes.
-Neither the less you should run the **test_calculate_executor.py** module that is in the **TESTS** directory.
+Neither the less, after making changes it is recommended to run the **test_calculate_executor.py** module (you can find it in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory) to ensure that everything works as expected.
 
 Enjoy!
 
