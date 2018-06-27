@@ -32,7 +32,7 @@ http://localhost:8080/login
 enter your details and the calculator will appear.
 
 ## Making changes
-If you want to make changes in the app, make sure -as was menchend- to rebuild it after making the changes.
+If you want to make changes in the app, make sure -as was mentioned- to rebuild it after making the changes.
 Neither the less, after making changes it is recommended to run the **test_calculate_executor.py** module (you can find it in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory) to ensure that everything works as expected.
 
 Enjoy!
