@@ -64,13 +64,13 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 def run():
     import os
     sys.path.insert(0, '/app/server')
-    config = json.load(open('server/config.json'))
-    port=config['port']
+    #config = json.load(open('server/config.json'))
+    #port=config['port']
     print('starting server...')
 
     # Server settings
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
-    #port=5000
+    port=5000
     server_address = ('0.0.0.0', port)
     httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
     print('running server...')
