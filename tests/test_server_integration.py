@@ -142,25 +142,24 @@ class TestServerIntegration(unittest.TestCase):
         expected = '15'
         self.assertEqual(expected, actual)
 
-    def test_sending_operator_after_equals(self):
-        response = self.sendRequest(5)
-        response = self.sendRequest('+',response)
-        response = self.sendRequest(6, response)
-        response = self.sendRequest('=', response)
-        response = self.sendRequest('+',response)
-        response = self.sendRequest(4, response)
-        response = self.sendRequest('=', response)
-        actual = response['display']
-        expected = '15'
-        self.assertEqual(expected, actual)
-
-    def test_sending_operator_after_equals(self):
+    def test_sending_number_after_operation(self):
         response = self.sendRequest(5)
         response = self.sendRequest('+', response)
         response = self.sendRequest(6, response)
         response = self.sendRequest('=', response)
         response = self.sendRequest(4, response)
-        response = self.sendRequest('=', response)
         actual = response['display']
         expected = '4'
+        self.assertEqual(expected, actual)
+
+    def test_sending_operator_after_operation(self):
+        response = self.sendRequest(3)
+        response = self.sendRequest('*', response)
+        response = self.sendRequest(3, response)
+        response = self.sendRequest('=', response)
+        response = self.sendRequest(4, response)
+        response = self.sendRequest('*', response)
+        response = self.sendRequest(2, response)
+        actual = response['display']
+        expected = '2'
         self.assertEqual(expected, actual)
