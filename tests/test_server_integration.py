@@ -6,6 +6,7 @@ import json
 import _thread
 import time
 import os
+import logging
 
 SERVER_PORT = 5000
 
@@ -190,4 +191,17 @@ class TestServerIntegration(unittest.TestCase):
         response = self.sendRequest(4, response)
         actual = response['display']
         expected = '4'
+        self.assertEqual(expected, actual)
+
+    def test_multiple_operation_with_no_equal(self):
+        response = self.sendRequest(18)
+        response = self.sendRequest('-', response)
+        response = self.sendRequest(2, response)
+        response = self.sendRequest('-', response)
+        response = self.sendRequest(2, response)
+        response = self.sendRequest('-', response)
+        response = self.sendRequest(2, response)
+        response = self.sendRequest('-', response)
+        actual = response['display']
+        expected = '12'
         self.assertEqual(expected, actual)
