@@ -30,10 +30,10 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
         return
 
     def do_POST(self):
-        print("SERVER: in do post")
+        #print("SERVER: in do post")
         content_length = int(self.headers['Content-Length'])
         request_body = self.rfile.read(content_length).decode('utf-8')
-        print("SERVER: got from client: "+ request_body )
+        #print("SERVER: got from client: "+ request_body )
         args = json.loads(request_body)
         global req_to_map
         executor = req_to_map.get_executor(self.path)
@@ -41,7 +41,7 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.respond(response)
 
     def respond(self, response):
-        print("response dict is: "+str(response)+"\n")
+        #print("response dict is: "+str(response)+"\n")
         httpResponseDict = HttpResponseDict()
         self.send_response(httpResponseDict[response['status']])
         self.send_header('Content-type', 'text/json')
@@ -49,18 +49,6 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
         message_as_json = json.dumps(response)
         # # Write content as utf-8 data
         self.wfile.write(bytes(message_as_json, "utf8"))
-        '''
-        WORKS:
-        message = {"display": "55"}
-        message_as_json = json.dumps(message)
-        body = message_as_json
-        self.send_response(200)
-        self.end_headers()
-        response = BytesIO()
-        response.write(bytes(body, "utf8"))
-        print("SERVER: returning: "+body)
-        self.wfile.write(response.getvalue())
-        '''
 
 
 
@@ -76,8 +64,7 @@ def run():
     port=5000
     server_address = ('0.0.0.0', port)
     httpd = HTTPServer(server_address, HTTPServer_RequestHandler)
-    print('running server...')
-    print('running on port ...'+str(port))
+    print('running server on port {0}...'.format(str(port)))
 
     httpd.serve_forever()
 

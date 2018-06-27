@@ -32,7 +32,7 @@ class TestServerIntegration(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print("aaaaaaaaaaaaaa")
+        print("initializing integration test")
         _thread.start_new_thread(cls.powerup_server,())
         time.sleep(1)
 
