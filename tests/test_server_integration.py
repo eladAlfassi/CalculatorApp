@@ -1,7 +1,7 @@
 import unittest
 from http.server import HTTPServer
 import urllib.request
-from server.server_controller import testHTTPServer_RequestHandler
+from server.server_controller import HTTPServer_RequestHandler
 import json
 import _thread
 import time
@@ -41,7 +41,7 @@ class TestServerIntegration(unittest.TestCase):
     def powerup_server(cls):
         print('starting test server...')
         server_address = ('0.0.0.0', SERVER_PORT)
-        httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
+        httpd = HTTPServer(server_address, HTTPServer_RequestHandler)
         print('running server...')
         print('running on port ...' + str(SERVER_PORT))
         httpd.serve_forever()

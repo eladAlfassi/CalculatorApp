@@ -67,7 +67,7 @@ class CalculateExecutor(AbstractExecutor):
 
         #if got bad operation last time, restart calculator
         if state['display'] == CalculateExecutor.BAD_OPERATION:
-            return self.__handle_first_interaction('0')
+            return self.__handle_first_interaction(input,restart=True)
 
         #after last time got equal sign. were first number exists and second number doesn't.
         #if input is a number, override the number

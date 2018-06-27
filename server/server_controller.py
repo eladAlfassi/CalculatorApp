@@ -11,7 +11,7 @@ from server.HttpResponseDict import *
 
 
 # HTTPRequestHandler class
-class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
+class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
     # GET
     def do_GET(self):
@@ -75,7 +75,7 @@ def run():
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     port=5000
     server_address = ('0.0.0.0', port)
-    httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
+    httpd = HTTPServer(server_address, HTTPServer_RequestHandler)
     print('running server...')
     print('running on port ...'+str(port))
 
