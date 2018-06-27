@@ -7,7 +7,7 @@ import os
 #from HttpResponseDict import *
 from server.request_to_executor_mapper import *
 from server.HttpResponseDict import *
-
+import logging
 
 
 # HTTPRequestHandler class
@@ -33,7 +33,7 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
         #print("SERVER: in do post")
         content_length = int(self.headers['Content-Length'])
         request_body = self.rfile.read(content_length).decode('utf-8')
-        #print("SERVER: got from client: "+ request_body )
+        logging.debug('\nCLIENT input:'+ request_body)
         args = json.loads(request_body)
         global req_to_map
         executor = req_to_map.get_executor(self.path)
@@ -41,7 +41,7 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.respond(response)
 
     def respond(self, response):
-        #print("response dict is: "+str(response)+"\n")
+        logging.debug('\nSERVER: response dict is: '+str(response)+'\n')
         httpResponseDict = HttpResponseDict()
         self.send_response(httpResponseDict[response['status']])
         self.send_header('Content-type', 'text/json')

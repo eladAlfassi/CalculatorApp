@@ -1,7 +1,6 @@
 import sys
 sys.path.insert(0, '/app')
 from executor import calculate_executor
-from executor import not_valid_executor
 from collections import defaultdict
 
 class RequestToExecutorMapper(object):
@@ -12,7 +11,7 @@ class RequestToExecutorMapper(object):
         temp_dict = {
             "/calculate": calculate_executor.CalculateExecutor()
         }
-        self.mapper = defaultdict(lambda: not_valid_executor.NotValideExecutor, temp_dict)
+        self.mapper = defaultdict(None,temp_dict)
 
     def get_executor(self,executor_name):
         return self.mapper[executor_name]
