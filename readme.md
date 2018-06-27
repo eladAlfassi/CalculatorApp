@@ -14,14 +14,14 @@ git clone https://github.com/eladAlfassi/CalculatorApp.git
 Build the docker image by putting the **dockerfile** in the same level with **executor** and **server** folders.
 then run the command:
 ```
-docker-compose build calculator
+sudo docker-compose build calculator
 ```
 You should run this command after every change you make in the **Calculator** source code.
 
 # Running the app
 To run all services run the command:
 ```
-docker-compose up
+sudo docker-compose up
 ```
 
 ## Using the calculator
