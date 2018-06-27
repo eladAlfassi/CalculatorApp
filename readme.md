@@ -33,7 +33,16 @@ enter your details and the calculator will appear.
 
 ## Making changes
 If you want to make changes in the app, make sure -as was mentioned- to rebuild it after making the changes.
-Neither the less, after making changes it is recommended to run the **test_calculate_executor.py** module (you can find it in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory) to ensure that everything works as expected.
+Neither the less, after making changes it is highly recommended to run unit tests and integration tests as described below.
+You can also add unit and intgration test to **test_calculate_executor.py** and **test_server_integration.py** located in the [tests](https://github.com/eladAlfassi/CalculatorApp/tree/master/tests) directory.
+
+# Test the app
+For testing the app you shuld run the following command (from the CalculatorApp directory):
+```
+python3 -m unittest discover tests
+```
+this command will run unit and integration testing in the app, and output if tests were successful or not.
+
 
 Enjoy!
 
