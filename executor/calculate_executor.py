@@ -50,11 +50,11 @@ class CalculateExecutor(AbstractExecutor):
     def __is_equal_sign(self, input):
         return input == '='
 
-    def __handle_first_interaction(self,input):
+    def __handle_first_interaction(self,input,restart=False):
         # first interaction with user
         first_number = '0'
         operator = None
-        if self.__is_operator(input) or self.__is_equal_sign(input):
+        if not restart and self.__is_operator(input) or self.__is_equal_sign(input):
             display = '0'
             if self.__is_operator(input):
                 operator = input
@@ -64,9 +64,19 @@ class CalculateExecutor(AbstractExecutor):
         return {'status':'success','display': display, 'operator': operator, 'first_number': first_number, 'second_number': ''}
 
     def __handle_interaction(self,input,state):
+
         #if got bad operation last time, restart calculator
         if state['display'] == CalculateExecutor.BAD_OPERATION:
             return self.__handle_first_interaction('0')
+
+        #after last time got equal sign. were first number exists and second number doesn't.
+        #if input is a number, override the number
+        #0
+        if (not state['operator'] is None) and (self.__is_equal_sign(state['operator'])) and  not self.__is_operator(input):
+            print(">> 0\n")
+            return self.__handle_first_interaction(input,restart=True)
+
+
         # not in a middle of operation & got an operation (it's not first interaction so we assume first_number!=None)
         # 55 and got + => 55+
         #1
@@ -86,7 +96,7 @@ class CalculateExecutor(AbstractExecutor):
         # 3
         if state['operator'] is None and self.__is_equal_sign(input):
             print(">> 3\n")
-            return {'status':'success','display': state['first_number'], 'operator': None,
+            return {'status':'success','display': state['first_number'], 'operator': '=',
                     'first_number': state['first_number'],'second_number': ''}
         # in a middle of operation & got a number
         # 55+ and got 6 => 55+6
@@ -101,7 +111,7 @@ class CalculateExecutor(AbstractExecutor):
         # 5
         if (not (state['operator'] is None)) and self.__is_operator(input) and state['second_number']=='':
             print(">> 5\n")
-            return {'status':'success','display': state['second_number'], 'operator': state['operator'],
+            return {'status':'success','display': state['first_number'], 'operator': input,
                     'first_number': state['first_number'], 'second_number': state['second_number']}
         # in a middle of operation & got an operation & second number exist
         #55+6 and got - => 61-
@@ -118,15 +128,16 @@ class CalculateExecutor(AbstractExecutor):
             print(">> 7\n")
             first_number = self.__operation(state['first_number'], state['second_number'], state['operator'])
             # possible dividing by zero
-            return {'status':'success','display': first_number, 'operator': None,
+            return {'status':'success','display': first_number, 'operator': '=',
                     'first_number':first_number, 'second_number': ''}
         # in a middle of operation & got equal sign & second number is ''
         #55+ and got = => 55
         # 8
         if (not (state['operator'] is None)) and self.__is_equal_sign(input) and  state['second_number'] == '':
             print(">> 8\n")
-            return {'status':'success','display': state['first_number'], 'operator': None,
+            return {'status':'success','display': state['first_number'], 'operator': '=',
                     'first_number': state['first_number'], 'second_number': ''}
+
 
 
     def execute(self, args):
