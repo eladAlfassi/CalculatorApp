@@ -72,7 +72,8 @@ class CalculateExecutor(AbstractExecutor):
         #after last time got equal sign. were first number exists and second number doesn't.
         #if input is a number, override the number
         #0
-        if (not state['operator'] is None) and (self.__is_equal_sign(state['operator'])) and  not self.__is_operator(input):
+        if (not state['operator'] is None) and (self.__is_equal_sign(state['operator'])) and not self.__is_operator(input) \
+                and not self.__is_equal_sign(input):
             print(">> 0\n")
             return self.__handle_first_interaction(input,restart=True)
 
