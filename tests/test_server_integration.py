@@ -173,12 +173,21 @@ class TestServerIntegration(unittest.TestCase):
         expected = 'BAD OPERATION'
         self.assertEqual(expected, actual)
 
-    def test_number_after_bad_operation(self):
+    def test_operation_after_bad_operation(self):
         response = self.sendRequest(6)
         response = self.sendRequest('/', response)
         response = self.sendRequest(0, response)
         response = self.sendRequest('*', response)
         response = self.sendRequest(3, response)
+        actual = response['display']
+        expected = '3'
+        self.assertEqual(expected, actual)
+
+    def test_number_after_bad_operation(self):
+        response = self.sendRequest(6)
+        response = self.sendRequest('/', response)
+        response = self.sendRequest(0, response)
+        response = self.sendRequest(4, response)
         actual = response['display']
         expected = '4'
         self.assertEqual(expected, actual)
