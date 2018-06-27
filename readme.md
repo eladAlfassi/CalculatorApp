@@ -3,6 +3,7 @@
 ## Prerequisites
 First of all you should make sure you have [docker](https://docs.docker.com/install/)  and [docker compose](https://docs.docker.com/compose/install/) installed on your machine.
 For downloading the source code you should have [git](https://git-scm.com/downloads) installed on your machine.
+For testing the app (as described below) you should have python3 installed on your machine. You can get that [here](https://www.python.org/downloads/).
 
 ## How to download?
 Run this command to clone the repository:
