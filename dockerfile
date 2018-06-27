@@ -5,4 +5,4 @@ WORKDIR /app
 
 
 
-CMD ["python", "-u", "server/server.py"]
+CMD ["python", "-m", "server.server_controller.py"]
