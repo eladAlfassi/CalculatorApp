@@ -80,7 +80,7 @@ class CalculateExecutor(AbstractExecutor):
         #0
         if (not state['operator'] is None) and (self.__is_equal_sign(state['operator'])) and  not self.__is_operator(input)\
                 and not self.__is_equal_sign(input):
-            #print(">> 0\n")
+            logging.debug('entered to  0\n')
             return self.__handle_first_interaction(input,restart=True)
 
 
@@ -88,28 +88,28 @@ class CalculateExecutor(AbstractExecutor):
         # 55 and got + => 55+
         #1
         if state['operator'] is None and self.__is_operator(input):
-            #print(">> 1\n")
+            logging.debug('entered to  1')
             return {'status':'success','display': state['first_number'], 'operator': input, 'first_number': state['first_number'],
                     'second_number': ''}
         # not in a middle of operation & got a number, concat to previous number
         # 55 and got 6 => 556
         # 2
         if state['operator'] is None and not (self.__is_operator(input) or self.__is_equal_sign(input)):
-            #print(">> 2\n")
+            logging.debug('entered to 2')
             first_number = self.__concat_numbers(state['first_number'] , input)
             return {'status':'success','display': first_number, 'operator': None, 'first_number': first_number, 'second_number': ''}
         # not in a middle of operation & got =
         # 55 and got = => 55
         # 3
         if state['operator'] is None and self.__is_equal_sign(input):
-            #print(">> 3\n")
+            logging.debug('entered to 3')
             return {'status':'success','display': state['first_number'], 'operator': '=',
                     'first_number': state['first_number'],'second_number': ''}
         # in a middle of operation & got a number
         # 55+ and got 6 => 55+6
         # 4
         if (not state['operator'] is None) and not (self.__is_equal_sign(input) or self.__is_operator(input)):
-            #print(">> 4\n")
+            logging.debug('entered to 4')
             second_number = self.__concat_numbers(state['second_number'] , input)
             return {'status':'success','display':second_number, 'operator': state['operator'],
                     'first_number': state['first_number'], 'second_number': second_number}
@@ -117,22 +117,22 @@ class CalculateExecutor(AbstractExecutor):
         # 55+ and got - => 55-
         # 5
         if (not (state['operator'] is None)) and self.__is_operator(input) and state['second_number']=='':
-            #print(">> 5\n")
+            logging.debug('entered to 5')
             return {'status':'success','display': state['first_number'], 'operator': input,
                     'first_number': state['first_number'], 'second_number': state['second_number']}
         # in a middle of operation & got an operation & second number exist
         #55+6 and got - => 61-
         # 6
         if (not (state['operator'] is None)) and self.__is_operator(input) and not state['second_number'] == '':
-            #print(">> 6\n")
+            logging.debug('entered to 6')
             first_number=self.__operation(state['first_number'],state['second_number'],state['operator'])
-            return {'status':'success','display': first_number, 'operator': state['operator'],
-                    'first_number': state['first_number'], 'second_number': ''}
+            return {'status':'success','display': first_number, 'operator': input,
+                    'first_number': first_number, 'second_number': ''}
         # in a middle of operation & got equal sign & second number exist
         #55+6 and got = => 61
         # 7
         if (not (state['operator'] is None)) and self.__is_equal_sign(input) and not state['second_number'] == '':
-            #print(">> 7\n")
+            logging.debug('entered to 7')
             first_number = self.__operation(state['first_number'], state['second_number'], state['operator'])
             # possible dividing by zero
             return {'status':'success','display': first_number, 'operator': '=',
@@ -141,7 +141,7 @@ class CalculateExecutor(AbstractExecutor):
         #55+ and got = => 55
         # 8
         if (not (state['operator'] is None)) and self.__is_equal_sign(input) and  state['second_number'] == '':
-            #print(">> 8\n")
+            logging.debug('entered to 8')
             return {'status':'success','display': state['first_number'], 'operator': '=',
                     'first_number': state['first_number'], 'second_number': ''}
 
