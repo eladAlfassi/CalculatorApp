@@ -3,8 +3,11 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from io import BytesIO
 import json
 import os
-from request_to_executor_mapper import *
-from HttpResponseDict import *
+#from request_to_executor_mapper import *
+#from HttpResponseDict import *
+from server.request_to_executor_mapper import *
+from server.HttpResponseDict import *
+
 
 
 # HTTPRequestHandler class
