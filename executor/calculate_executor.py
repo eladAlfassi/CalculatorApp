@@ -50,6 +50,9 @@ class CalculateExecutor(AbstractExecutor):
     def __is_equal_sign(self, input):
         return input == '='
 
+    def __is_number(self, input):
+        return str.isdigit(input)
+
     def __handle_first_interaction(self,input,restart=False):
         # first interaction with user
         first_number = '0'
@@ -67,7 +70,10 @@ class CalculateExecutor(AbstractExecutor):
 
         #if got bad operation last time, restart calculator
         if state['display'] == CalculateExecutor.BAD_OPERATION:
-            return self.__handle_first_interaction(input,restart=True)
+            if self.__is_number(input):
+                return self.__handle_first_interaction(input,restart=True)
+            else:
+                return state
 
         #after last time got equal sign. were first number exists and second number doesn't.
         #if input is a number, override the number
