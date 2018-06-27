@@ -44,6 +44,7 @@ python3 -m unittest discover tests
 this command will run unit and integration testing in the app, and output if tests were successful or not.
 
 
-Enjoy!
+
+# Enjoy!
 
 
