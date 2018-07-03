@@ -38,7 +38,7 @@ Neither the less, after making changes it is highly recommended to run unit test
 
 
 # Test the app
-For testing the app you shuld run the following command (from the CalculatorApp directory):
+For testing the app you shuold run the following command (from the CalculatorApp directory):
 ```
 python3 -m unittest discover tests
 ```
